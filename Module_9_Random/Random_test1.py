@@ -10,5 +10,4 @@ select = np.random.choice(even,size = 3,replace = False) #Получите из 
 triplet =np.random.permutation(select) # перемешанные значения из массива select (сам select измениться не должен)
 
 
-
-print(select)
+print(num)
