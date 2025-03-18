@@ -34,6 +34,85 @@ def shuffle_seed(array):
     
     return (res_arr, int(l_seed))
     
+def min_max_dist(*vectors):
+    """функция принимает на вход неограниченное число векторов через запятую. 
+    Гарантируется, что все векторы, которые передаются, одинаковой длины.
+    Функция возвращает минимальное и максимальное расстояние между векторами в виде кортежа."""
+    min_len = 0
+    max_len  = 0
+    
+    cur_len = np.linalg.norm(vectors[0]-vectors[len(vectors)-1]) 
+    min_len = cur_len
+    max_len = cur_len
+    
+    
+    for i in range(len(vectors)-2):
+        cur_len = np.linalg.norm(vectors[i]-vectors[i+1])
+        
+        if cur_len > max_len:
+            max_len = cur_len
+        else:
+            if cur_len < min_len:
+                min_len = cur_len        
+        
+    
+    return (float(min_len), float(max_len))
+
+def any_normal(*vectors):
+    """принимает на вход неограниченное число векторов через запятую. 
+    Гарантируется, что все векторы, которые передаются, одинаковой длины.
+    Функция возвращает True, если есть хотя бы одна пара перпендикулярных векторов np.dot(v1,v2) == 0. 
+    Иначе возвращает False.
+    """
+    res_normal = False
+    
+    l_dot = np.dot(vectors[0],vectors[len(vectors)-1])
+    
+    if l_dot == 0:
+        res_normal = True
+    else:
+        for i in range(len(vectors)-1):
+            l_dot = np.dot(vectors[i],vectors[i+1])
+            if l_dot == 0:
+                res_normal = True
+                break
+
+    return res_normal         
+
+def get_loto(num):
+    """функция генерирует трёхмерный массив случайных целых чисел от 1 до 100 (включительно). 
+    Это поля для игры в лото.
+    Трёхмерный массив должен состоять из таблиц чисел формы 5х5, то есть итоговая форма — (num, 5, 5).
+    
+    Args:
+        num (_type_): Функция возвращает полученный массив
+    """
+    
+    res_arr = np.random.randint(1, 101, size=(num,5,5), dtype = np.uint8)
+
+    return(res_arr)
+
+def get_unique_loto(num):
+    """функция генерирует трёхмерный массив случайных УНИКАЛЬНЫХ целых чисел от 1 до 100 (включительно). 
+    Это поля для игры в лото.
+    Трёхмерный массив должен состоять из таблиц чисел формы 5х5, то есть итоговая форма — (num, 5, 5).
+    
+    Args:
+        num (_type_): Функция возвращает полученный массив
+    """
+    i = 1
+    res_arr  = np.random.choice(101, (5,5), replace=False)
+    
+    for i in range(num-1):
+        
+        next_arr = np.random.choice(101, (5,5), replace=False)
+        res_arr = np.vstack([res_arr, next_arr])
+     
+    res_arr = res_arr.reshape(num,5,5)
+   
+    return(res_arr)
 
 
 
+
+get_unique_loto(10)
