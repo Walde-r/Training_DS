@@ -113,6 +113,6 @@ def get_unique_loto(num):
     return(res_arr)
 
 
+simplelist = [19, 242, 14, 152, 142, 1000]
 
-
-get_unique_loto(10)
+print(np.mean(simplelist))
