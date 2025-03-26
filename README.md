@@ -12,3 +12,6 @@ From the [Skill Factory Data Science](https://skillfactory.ru/data-scientist)
 ## [Замечательная](https://itfy.org/threads/kniga-o-biblioteke-pandas-pandas-rabota-s-dannymi-abdraxmanov-m-i.1262/) книга по работе с Pandas
 
 ## «Feature engineering: шесть шагов для создания успешной модели машинного обучения» [Статья](https://hightech.fm/2018/08/09/featureengineering)
+
+
+## [Регулярные выражения](https://tproger.ru/translations/regular-expression-python/)
