@@ -17,3 +17,7 @@ From the [Skill Factory Data Science](https://skillfactory.ru/data-scientist)
 ## [Регулярные выражения](https://tproger.ru/translations/regular-expression-python/)
 
 ## [Методы](https://pythobyte.com/how-to-merge-dataframes-in-pandas-23614/) объединения DataFrame 
+
+## [Matplotlib документация](https://matplotlib.org/)
+
+## [Seaborn документация](https://seaborn.pydata.org/index.html#)
