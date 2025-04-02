@@ -21,3 +21,7 @@ From the [Skill Factory Data Science](https://skillfactory.ru/data-scientist)
 ## [Matplotlib документация](https://matplotlib.org/)
 
 ## [Seaborn документация](https://seaborn.pydata.org/index.html#)
+
+## [Plot документация](https://plotly.com/python/)
+
+## [Цветовая гамма](https://matplotlib.org/stable/users/explain/colors/colormaps.html)
