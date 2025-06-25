@@ -1,0 +1,9 @@
+Поиск terminal.integrated.shellArgs.windows
+
+
+"terminal.integrated.shellArgs.windows": [
+  "-ExecutionPolicy", "Bypass", 
+  "-NoExit", 
+  "-Command", 
+  "& 'C:\\Users\\washe\\miniconda3\\shell\\condabin\\conda-hook.ps1'; conda activate 'myConda_env'"
+]
