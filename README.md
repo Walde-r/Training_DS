@@ -16,7 +16,7 @@ From the [Skill Factory Data Science](https://skillfactory.ru/data-scientist)
 
 ## [Регулярные выражения](https://tproger.ru/translations/regular-expression-python/)
 
-## [Методы](https://pythobyte.com/how-to-merge-dataframes-in-pandas-23614/) объединения DataFrame 
+## [Методы](https://pythobyte.com/how-to-merge-dataframes-in-pandas-23614/) объединения DataFrame
 
 ## [Matplotlib документация](https://matplotlib.org/)
 
@@ -25,3 +25,5 @@ From the [Skill Factory Data Science](https://skillfactory.ru/data-scientist)
 ## [Plot документация](https://plotly.com/python/)
 
 ## [Цветовая гамма](https://matplotlib.org/stable/users/explain/colors/colormaps.html)
+
+## [Oracle](https://python-oracledb.readthedocs.io/en/latest/user_guide/sql_execution.html)
