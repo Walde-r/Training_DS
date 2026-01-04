@@ -1,0 +1,42 @@
+3 channel Terms of Service accepted
+Retrieving notices: - \ | / - \ done
+Channels:
+ - conda-forge
+ - defaults
+Platform: win-64
+Collecting package metadata (repodata.json): / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | / - \ | done
+Solving environment: - \ | / done
+
+## Package Plan ##
+
+  environment location: C:\myProgram\Python\anaconda3\envs\myConda_env_312
+
+  added / updated specs:
+    - nbformat
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    jsonschema-4.25.1          |     pyhe01879c_0          80 KB  conda-forge
+    jsonschema-specifications-2025.9.1|     pyhcf101f3_0          19 KB  conda-forge
+    nbformat-5.10.4            |     pyhd8ed1ab_1          99 KB  conda-forge
+    python-fastjsonschema-2.21.2|     pyhe01879c_0         239 KB  conda-forge
+    referencing-0.37.0         |     pyhcf101f3_0          51 KB  conda-forge
+    rpds-py-0.22.3             |  py312h636fa0f_0         252 KB
+    ------------------------------------------------------------
+                                           Total:         739 KB
+
+The following NEW packages will be INSTALLED:
+
+  jsonschema         conda-forge/noarch::jsonschema-4.25.1-pyhe01879c_0 
+  jsonschema-specif~ conda-forge/noarch::jsonschema-specifications-2025.9.1-pyhcf101f3_0 
+  nbformat           conda-forge/noarch::nbformat-5.10.4-pyhd8ed1ab_1 
+  python-fastjsonsc~ conda-forge/noarch::python-fastjsonschema-2.21.2-pyhe01879c_0 
+  referencing        conda-forge/noarch::referencing-0.37.0-pyhcf101f3_0 
+  rpds-py            pkgs/main/win-64::rpds-py-0.22.3-py312h636fa0f_0 
+
+
+Proceed ([y]/n)? Invalid choice: conda update -n base -c defaults conda
+Proceed ([y]/n)? 
