@@ -1,0 +1,44 @@
+.widget-button__icon{
+background: #b5e916 !important;
+color: #181818 !important;
+box-shadow: none !important;
+}
+
+#ticket-app .ticket .ticket-conversation__message-html pre {
+    max-width: 800px !important;
+  white-space: pre-wrap; 
+  overflow-wrap: break-word;
+}
+
+.chat-buttons__button .el-button {
+    line-height: 0.5 !important;
+}
+
+.ticket-create__editor .ticket-editor__send-email-span {
+ display: none; 
+}
+
+.telephony {
+   display: none;
+}
+
+.el-cascader-node__label {max-width: 80vw;}
+
+.ticket-fields__custom-field-ticket-custom-field-32-popper .el-cascader-menu__wrap.el-scrollbar__wrap{
+height:auto;
+}
+.ticket-fields__custom-field-ticket-custom-field-18-popper .el-cascader-menu__wrap.el-scrollbar__wrap{
+height:auto;
+}
+.ticket-fields__custom-field-ticket-custom-field-24-popper .el-cascader-menu__wrap.el-scrollbar__wrap{
+height:auto;
+}
+.ticket-fields__custom-field-ticket-custom-field-38-popper .el-cascader-menu__wrap.el-scrollbar__wrap{
+height:auto;
+}
+.public-layout .hero {
+
+background: #B5E916 !important;
+
+}
+

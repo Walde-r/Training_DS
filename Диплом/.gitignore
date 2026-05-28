@@ -1,0 +1,42 @@
+# Исходные данные (большие файлы)
+data/*.csv
+!data/data_sample.csv
+data_processed/*.csv
+
+# Модели (бинарные файлы)
+models/*.pkl
+models/*.joblib
+
+# Кеши Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Виртуальное окружение
+.env/
+venv/
+.venv/
+env/
+
+# Jupyter notebook (чекапойнты)
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Файлы логов и временные файлы
+*.log
+*.tmp
+*.bak
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS метаданные
+.DS_Store
+Thumbs.db
+
+# Графики и визуализации (оставляем)
+# data_processed/*.png  ← если раскомментировать, то графики НЕ будут выгружаться

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<!-- saved from url=(31538)data:text/html,%3C!doctype%20html%3E%0A%3Chtml%3E%0A%20%20%3Chead%3E%0A%20%20%20%20%3Cmeta%20charset=%22utf-8%22%3E%0A%20%20%20%20%3Cmeta%20name=%22viewport%22%0A%20%20%20%20%20%20content=%22initial-scale=1,%20minimum-scale=1,%20width=device-width%22%3E%0A%20%20%20%20%3Cscript%3E%0A%20%20%20%20%20%20//%20If%20this%20page%20is%20embedded%20in%20a%20WebViewPlugin,%20the%20'window.plugin'%0A%20%20%20%20%20%20//%20object%20is%20externally%20defined,%20and%20we%20trigger%20the%20download%20that%20way.%0A%20%20%20%20%20%20if%20(window.plugin%20!==%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20window.addEventListener('DOMContentLoaded',%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20button%20=%20document.getElementById('open-button');%0A%20%20%20%20%20%20%20%20%20%20button.addEventListener('click',%20function(e)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20window.plugin.openPDF();%0A%20%20%20%20%20%20%20%20%20%20%20%20e.preventDefault();%0A%20%20%20%20%20%20%20%20%20%20%7D);%0A%0A%20%20%20%20%20%20%20%20%20%20if%20(plugin.notifyPlaceholderReadyForTesting)%0A%20%20%20%20%20%20%20%20%20%20%20%20plugin.notifyPlaceholderReadyForTesting();%0A%20%20%20%20%20%20%20%20%7D);%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20window.onkeydown%20=%20function(e)%20%7B%0A%20%20%20%20%20%20%20%20if%20(e.key%20==%20'Enter'%20%7C%7C%20e.key%20==%20'%20')%20%7B%0A%20%20%20%20%20%20%20%20%20%20document.getElementById('open-button').click();%0A%20%20%20%20%20%20%20%20%20%20e.preventDefault();%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D;%0A%20%20%20%20%3C/script%3E%0A%20%20%20%20%3Cstyle%3E/*%20Copyright%202017%20The%20Chromium%20Authors%0A%20*%20Use%20of%20this%20source%20code%20is%20governed%20by%20a%20BSD-style%20license%20that%20can%20be%0A%20*%20found%20in%20the%20LICENSE%20file.%20*/%0A%0Aa%20%7B%0A%20%20color%3A%20var(-%2Dlink-color);%0A%7D%0A%0Abody%20%7B%0A%20%20-%2Dbackground-color%3A%20%23fff;%0A%20%20-%2Derror-code-color%3A%20var(-%2Dgoogle-gray-700);%0A%20%20-%2Dgoogle-blue-50%3A%20rgb(232,%20240,%20254);%0A%20%20-%2Dgoogle-blue-100%3A%20rgb(210,%20227,%20252);%0A%20%20-%2Dgoogle-blue-300%3A%20rgb(138,%20180,%20248);%0A%20%20-%2Dgoogle-blue-600%3A%20rgb(26,%20115,%20232);%0A%20%20-%2Dgoogle-blue-700%3A%20rgb(25,%20103,%20210);%0A%20%20-%2Dgoogle-gray-100%3A%20rgb(241,%20243,%20244);%0A%20%20-%2Dgoogle-gray-300%3A%20rgb(218,%20220,%20224);%0A%20%20-%2Dgoogle-gray-500%3A%20rgb(154,%20160,%20166);%0A%20%20-%2Dgoogle-gray-50%3A%20rgb(248,%20249,%20250);%0A%20%20-%2Dgoogle-gray-600%3A%20rgb(128,%20134,%20139);%0A%20%20-%2Dgoogle-gray-700%3A%20rgb(95,%2099,%20104);%0A%20%20-%2Dgoogle-gray-800%3A%20rgb(60,%2064,%2067);%0A%20%20-%2Dgoogle-gray-900%3A%20rgb(32,%2033,%2036);%0A%20%20-%2Dheading-color%3A%20var(-%2Dgoogle-gray-900);%0A%20%20-%2Dlink-color%3A%20rgb(88,%2088,%2088);%0A%20%20-%2Dprimary-button-fill-color-active%3A%20var(-%2Dgoogle-blue-700);%0A%20%20-%2Dprimary-button-fill-color%3A%20var(-%2Dgoogle-blue-600);%0A%20%20-%2Dprimary-button-text-color%3A%20%23fff;%0A%20%20-%2Dquiet-background-color%3A%20rgb(247,%20247,%20247);%0A%20%20-%2Dsecondary-button-border-color%3A%20var(-%2Dgoogle-gray-500);%0A%20%20-%2Dsecondary-button-fill-color%3A%20%23fff;%0A%20%20-%2Dsecondary-button-hover-border-color%3A%20var(-%2Dgoogle-gray-600);%0A%20%20-%2Dsecondary-button-hover-fill-color%3A%20var(-%2Dgoogle-gray-50);%0A%20%20-%2Dsecondary-button-text-color%3A%20var(-%2Dgoogle-gray-700);%0A%20%20-%2Dsmall-link-color%3A%20var(-%2Dgoogle-gray-700);%0A%20%20-%2Dtext-color%3A%20var(-%2Dgoogle-gray-700);%0A%20%20background%3A%20var(-%2Dbackground-color);%0A%20%20color%3A%20var(-%2Dtext-color);%0A%20%20word-wrap%3A%20break-word;%0A%7D%0A%0A%0A%0A.hidden%20%7B%0A%20%20display%3A%20none;%0A%7D%0A%0Ahtml%20%7B%0A%20%20-webkit-text-size-adjust%3A%20100%25;%0A%20%20font-size%3A%20125%25;%0A%7D%0A%0A.icon%20%7B%0A%20%20background-repeat%3A%20no-repeat;%0A%20%20background-size%3A%20100%25;%0A%7D%0A%0A@media%20(prefers-color-scheme%3A%20dark)%20%7B%0A%20%20body%20%7B%0A%20%20%20%20-%2Dbackground-color%3A%20var(-%2Dgoogle-gray-900);%0A%20%20%20%20-%2Derror-code-color%3A%20var(-%2Dgoogle-gray-500);%0A%20%20%20%20-%2Dheading-color%3A%20var(-%2Dgoogle-gray-500);%0A%20%20%20%20-%2Dlink-color%3A%20var(-%2Dgoogle-blue-300);%0A%20%20%20%20-%2Dprimary-button-fill-color-active%3A%20rgb(129,%20162,%20208);%0A%20%20%20%20-%2Dprimary-button-fill-color%3A%20var(-%2Dgoogle-blue-300);%0A%20%20%20%20-%2Dprimary-button-text-color%3A%20var(-%2Dgoogle-gray-900);%0A%20%20%20%20-%2Dquiet-background-color%3A%20var(-%2Dbackground-color);%0A%20%20%20%20-%2Dsecondary-button-border-color%3A%20var(-%2Dgoogle-gray-700);%0A%20%20%20%20-%2Dsecondary-button-fill-color%3A%20var(-%2Dgoogle-gray-900);%0A%20%20%20%20-%2Dsecondary-button-hover-fill-color%3A%20rgb(48,%2051,%2057);%0A%20%20%20%20-%2Dsecondary-button-text-color%3A%20var(-%2Dgoogle-blue-300);%0A%20%20%20%20-%2Dsmall-link-color%3A%20var(-%2Dgoogle-blue-300);%0A%20%20%20%20-%2Dtext-color%3A%20var(-%2Dgoogle-gray-500);%0A%20%20%7D%0A%7D%0A%0A/*%20Apply%20Yandex%20CSS%20patch.%20*/%0A%0Abody%20%7B%0A%20%20-%2Dyandex-yellow-100%3A%20%23ffcc00;%0A%20%20-%2Dyandex-yellow-300%3A%20%23ffa400;%0A%20%20-%2Dyandex-black%3A%20%23000;%0A%7D%0A%0Abody.pdf%20%7B%0A%20%20-%2Dprimary-button-fill-color-active%3A%20var(-%2Dyandex-yellow-300);%0A%20%20-%2Dprimary-button-fill-color%3A%20var(-%2Dyandex-yellow-100);%0A%20%20-%2Dprimary-button-text-color%3A%20var(-%2Dyandex-black);%0A%7D%0A%3C/style%3E%0A%20%20%20%20%3Cstyle%3E/*%20Copyright%202014%20The%20Chromium%20Authors%0A%20%20%20Use%20of%20this%20source%20code%20is%20governed%20by%20a%20BSD-style%20license%20that%20can%20be%0A%20%20%20found%20in%20the%20LICENSE%20file.%20*/%0A%0Abutton%20%7B%0A%20%20border%3A%200;%0A%20%20border-radius%3A%2020px;%0A%20%20box-sizing%3A%20border-box;%0A%20%20color%3A%20var(-%2Dprimary-button-text-color);%0A%20%20cursor%3A%20pointer;%0A%20%20float%3A%20right;%0A%20%20font-size%3A%20.875em;%0A%20%20margin%3A%200;%0A%20%20padding%3A%208px%2016px;%0A%20%20transition%3A%20box-shadow%20150ms%20cubic-bezier(0.4,%200,%200.2,%201);%0A%20%20user-select%3A%20none;%0A%7D%0A%0A%5Bdir='rtl'%5D%20button%20%7B%0A%20%20float%3A%20left;%0A%7D%0A%0A.bad-clock%20button,%0A.captive-portal%20button,%0A.https-only%20button,%0A.insecure-form%20button,%0A.lookalike-url%20button,%0A.main-frame-blocked%20button,%0A.neterror%20button,%0A.pdf%20button,%0A.ssl%20button,%0A.enterprise-block%20button,%0A.enterprise-warn%20button,%0A.managed-profile-required%20button,%0A.safe-browsing-billing%20button,%0A.supervised-user-verify%20button,%0A.supervised-user-verify-subframe%20button%20%7B%0A%20%20background%3A%20var(-%2Dprimary-button-fill-color);%0A%7D%0A%0Abutton%3Aactive%20%7B%0A%20%20background%3A%20var(-%2Dprimary-button-fill-color-active);%0A%20%20outline%3A%200;%0A%7D%0A%0A%23debugging%20%7B%0A%20%20display%3A%20inline;%0A%20%20overflow%3A%20auto;%0A%7D%0A%0A.debugging-content%20%7B%0A%20%20line-height%3A%201em;%0A%20%20margin-bottom%3A%200;%0A%20%20margin-top%3A%201em;%0A%7D%0A%0A.debugging-content-fixed-width%20%7B%0A%20%20display%3A%20block;%0A%20%20font-family%3A%20monospace;%0A%20%20font-size%3A%201.2em;%0A%20%20margin-top%3A%200.5em;%0A%7D%0A%0A.debugging-title%20%7B%0A%20%20font-weight%3A%20bold;%0A%7D%0A%0A%23details%20%7B%0A%20%20margin%3A%200%200%2050px;%0A%7D%0A%0A%23details%20p%3Anot(%3Afirst-of-type)%20%7B%0A%20%20margin-top%3A%2020px;%0A%7D%0A%0A.secondary-button%3Aactive%20%7B%0A%20%20border-color%3A%20white;%0A%20%20box-shadow%3A%200%201px%202px%200%20rgba(60,%2064,%2067,%20.3),%0A%20%20%20%20%20%200%202px%206px%202px%20rgba(60,%2064,%2067,%20.15);%0A%7D%0A%0A.secondary-button%3Ahover%20%7B%0A%20%20background%3A%20var(-%2Dsecondary-button-hover-fill-color);%0A%20%20border-color%3A%20var(-%2Dsecondary-button-hover-border-color);%0A%20%20text-decoration%3A%20none;%0A%7D%0A%0A.error-code%20%7B%0A%20%20color%3A%20var(-%2Derror-code-color);%0A%20%20font-size%3A%20.8em;%0A%20%20margin-top%3A%2012px;%0A%20%20text-transform%3A%20uppercase;%0A%7D%0A%0A%23error-debugging-info%20%7B%0A%20%20font-size%3A%200.8em;%0A%7D%0A%0Ah1%20%7B%0A%20%20color%3A%20var(-%2Dheading-color);%0A%20%20font-size%3A%201.6em;%0A%20%20font-weight%3A%20normal;%0A%20%20line-height%3A%201.25em;%0A%20%20margin-bottom%3A%2016px;%0A%7D%0A%0Ah2%20%7B%0A%20%20font-size%3A%201.2em;%0A%20%20font-weight%3A%20normal;%0A%7D%0A%0A.icon%20%7B%0A%20%20height%3A%2072px;%0A%20%20margin%3A%200%200%2040px;%0A%20%20width%3A%2072px;%0A%7D%0A%0Ainput%5Btype=checkbox%5D%20%7B%0A%20%20opacity%3A%200;%0A%7D%0A%0Ainput%5Btype=checkbox%5D%3Afocus%20~%20.checkbox%3A%3Aafter%20%7B%0A%20%20outline%3A%20-webkit-focus-ring-color%20auto%205px;%0A%7D%0A%0A.interstitial-wrapper%20%7B%0A%20%20box-sizing%3A%20border-box;%0A%20%20font-size%3A%201em;%0A%20%20line-height%3A%201.6em;%0A%20%20margin%3A%2014vh%20auto%200;%0A%20%20max-width%3A%20600px;%0A%20%20width%3A%20100%25;%0A%7D%0A%0A%23main-message%20%3E%20p%20%7B%0A%20%20display%3A%20inline;%0A%7D%0A%0A%23extended-reporting-opt-in%20%7B%0A%20%20font-size%3A%20.875em;%0A%20%20margin-top%3A%2032px;%0A%7D%0A%0A%23extended-reporting-opt-in%20label%20%7B%0A%20%20display%3A%20grid;%0A%20%20grid-template-columns%3A%201.8em%201fr;%0A%20%20position%3A%20relative;%0A%7D%0A%0A%23enhanced-protection-message%20%7B%0A%20%20border-radius%3A%2020px;%0A%20%20font-size%3A%201em;%0A%20%20margin-top%3A%2032px;%0A%20%20padding%3A%2010px%205px;%0A%7D%0A%0A%23enhanced-protection-message%20a%20%7B%0A%20%20color%3A%20var(-%2Dgoogle-red-10);%0A%7D%0A%0A%23enhanced-protection-message%20label%20%7B%0A%20%20display%3A%20grid;%0A%20%20grid-template-columns%3A%202.5em%201fr;%0A%20%20position%3A%20relative;%0A%7D%0A%0A%23enhanced-protection-message%20div%20%7B%0A%20%20margin%3A%200.5em;%0A%7D%0A%0A%23enhanced-protection-message%20.icon%20%7B%0A%20%20height%3A%201.5em;%0A%20%20vertical-align%3A%20middle;%0A%20%20width%3A%201.5em;%0A%7D%0A%0A.nav-wrapper%20%7B%0A%20%20margin-top%3A%2051px;%0A%7D%0A%0A.nav-wrapper%3A%3Aafter%20%7B%0A%20%20clear%3A%20both;%0A%20%20content%3A%20'';%0A%20%20display%3A%20table;%0A%20%20width%3A%20100%25;%0A%7D%0A%0A.small-link%20%7B%0A%20%20color%3A%20var(-%2Dsmall-link-color);%0A%20%20font-size%3A%20.875em;%0A%7D%0A%0A.checkboxes%20%7B%0A%20%20flex%3A%200%200%2024px;%0A%7D%0A%0A.checkbox%20%7B%0A%20%20-%2Dpadding%3A%20.9em;%0A%20%20background%3A%20transparent;%0A%20%20display%3A%20block;%0A%20%20height%3A%201em;%0A%20%20left%3A%20-1em;%0A%20%20padding-inline-start%3A%20var(-%2Dpadding);%0A%20%20position%3A%20absolute;%0A%20%20right%3A%200;%0A%20%20top%3A%20-.5em;%0A%20%20width%3A%201em;%0A%7D%0A%0A.checkbox%3A%3Aafter%20%7B%0A%20%20border%3A%201px%20solid%20white;%0A%20%20border-radius%3A%202px;%0A%20%20content%3A%20'';%0A%20%20height%3A%201em;%0A%20%20left%3A%20var(-%2Dpadding);%0A%20%20position%3A%20absolute;%0A%20%20top%3A%20var(-%2Dpadding);%0A%20%20width%3A%201em;%0A%7D%0A%0A.checkbox%3A%3Abefore%20%7B%0A%20%20background%3A%20transparent;%0A%20%20border%3A%202px%20solid%20white;%0A%20%20border-inline-end-width%3A%200;%0A%20%20border-top-width%3A%200;%0A%20%20content%3A%20'';%0A%20%20height%3A%20.2em;%0A%20%20left%3A%20calc(.3em%20+%20var(-%2Dpadding));%0A%20%20opacity%3A%200;%0A%20%20position%3A%20absolute;%0A%20%20top%3A%20calc(.3em%20%20+%20var(-%2Dpadding));%0A%20%20transform%3A%20rotate(-45deg);%0A%20%20width%3A%20.5em;%0A%7D%0A%0Ainput%5Btype=checkbox%5D%3Achecked%20~%20.checkbox%3A%3Abefore%20%7B%0A%20%20opacity%3A%201;%0A%7D%0A%0A@media%20(max-width%3A%20700px)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20padding%3A%200%2010%25;%0A%20%20%7D%0A%0A%20%20%23error-debugging-info%20%7B%0A%20%20%20%20overflow%3A%20auto;%0A%20%20%7D%0A%7D%0A%0A@media%20(max-width%3A%20420px)%20%7B%0A%20%20button,%0A%20%20%5Bdir='rtl'%5D%20button,%0A%20%20.small-link%20%7B%0A%20%20%20%20float%3A%20none;%0A%20%20%20%20font-size%3A%20.825em;%0A%20%20%20%20font-weight%3A%20500;%0A%20%20%20%20margin%3A%200;%0A%20%20%20%20width%3A%20100%25;%0A%20%20%7D%0A%0A%20%20button%20%7B%0A%20%20%20%20padding%3A%2016px%2024px;%0A%20%20%7D%0A%0A%20%20%23details%20%7B%0A%20%20%20%20margin%3A%2020px%200%2020px%200;%0A%20%20%7D%0A%0A%20%20%23details%20p%3Anot(%3Afirst-of-type)%20%7B%0A%20%20%20%20margin-top%3A%2010px;%0A%20%20%7D%0A%0A%20%20.secondary-button%3Anot(.hidden)%20%7B%0A%20%20%20%20display%3A%20block;%0A%20%20%20%20margin-top%3A%2020px;%0A%20%20%20%20text-align%3A%20center;%0A%20%20%20%20width%3A%20100%25;%0A%20%20%7D%0A%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20padding%3A%200%205%25;%0A%20%20%7D%0A%0A%20%20%23extended-reporting-opt-in%20%7B%0A%20%20%20%20margin-top%3A%2024px;%0A%20%20%7D%0A%0A%20%20%23enhanced-protection-message%20%7B%0A%20%20%20%20margin-top%3A%2024px;%0A%20%20%7D%0A%0A%20%20.nav-wrapper%20%7B%0A%20%20%20%20margin-top%3A%2030px;%0A%20%20%7D%0A%7D%0A%0A/**%0A%20*%20Mobile%20specific%20styling.%0A%20*%20Navigation%20buttons%20are%20anchored%20to%20the%20bottom%20of%20the%20screen.%0A%20*%20Details%20message%20replaces%20the%20top%20content%20in%20its%20own%20scrollable%20area.%0A%20*/%0A%0A@media%20(max-width%3A%20420px)%20%7B%0A%20%20.nav-wrapper%20.secondary-button%20%7B%0A%20%20%20%20border%3A%200;%0A%20%20%20%20margin%3A%2016px%200%200;%0A%20%20%20%20margin-inline-end%3A%200;%0A%20%20%20%20padding-bottom%3A%2016px;%0A%20%20%20%20padding-top%3A%2016px;%0A%20%20%7D%0A%7D%0A%0A/*%20Fixed%20nav.%20*/%0A@media%20(min-width%3A%20240px)%20and%20(max-width%3A%20420px)%20and%0A%20%20%20%20%20%20%20(min-height%3A%20401px),%0A%20%20%20%20%20%20%20(min-width%3A%20421px)%20and%20(min-height%3A%20240px)%20and%0A%20%20%20%20%20%20%20(max-height%3A%20560px)%20%7B%0A%20%20body%20.nav-wrapper%20%7B%0A%20%20%20%20background%3A%20var(-%2Dbackground-color);%0A%20%20%20%20bottom%3A%200;%0A%20%20%20%20box-shadow%3A%200%20-12px%2024px%20var(-%2Dbackground-color);%0A%20%20%20%20left%3A%200;%0A%20%20%20%20margin%3A%200%20auto;%0A%20%20%20%20max-width%3A%20736px;%0A%20%20%20%20padding-inline-end%3A%2024px;%0A%20%20%20%20padding-inline-start%3A%2024px;%0A%20%20%20%20position%3A%20fixed;%0A%20%20%20%20right%3A%200;%0A%20%20%20%20width%3A%20100%25;%0A%20%20%20%20z-index%3A%202;%0A%20%20%7D%0A%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20max-width%3A%20736px;%0A%20%20%7D%0A%0A%20%20%23details,%0A%20%20%23main-content%20%7B%0A%20%20%20%20padding-bottom%3A%2040px;%0A%20%20%7D%0A%0A%20%20%23details%20%7B%0A%20%20%20%20padding-top%3A%205.5vh;%0A%20%20%7D%0A%0A%20%20button.small-link%20%7B%0A%20%20%20%20color%3A%20var(-%2Dgoogle-blue-600);%0A%20%20%7D%0A%7D%0A%0A@media%20(max-width%3A%20420px)%20and%20(orientation%3A%20portrait),%0A%20%20%20%20%20%20%20(max-height%3A%20560px)%20%7B%0A%20%20body%20%7B%0A%20%20%20%20margin%3A%200%20auto;%0A%20%20%7D%0A%0A%20%20button,%0A%20%20%5Bdir='rtl'%5D%20button,%0A%20%20button.small-link,%0A%20%20.nav-wrapper%20.secondary-button%20%7B%0A%20%20%20%20font-family%3A%20Roboto-Regular,Helvetica;%0A%20%20%20%20font-size%3A%20.933em;%0A%20%20%20%20margin%3A%206px%200;%0A%20%20%20%20transform%3A%20translatez(0);%0A%20%20%7D%0A%0A%20%20.nav-wrapper%20%7B%0A%20%20%20%20box-sizing%3A%20border-box;%0A%20%20%20%20padding-bottom%3A%208px;%0A%20%20%20%20width%3A%20100%25;%0A%20%20%7D%0A%0A%20%20%23details%20%7B%0A%20%20%20%20box-sizing%3A%20border-box;%0A%20%20%20%20height%3A%20auto;%0A%20%20%20%20margin%3A%200;%0A%20%20%20%20opacity%3A%201;%0A%20%20%20%20transition%3A%20opacity%20250ms%20cubic-bezier(0.4,%200,%200.2,%201);%0A%20%20%7D%0A%0A%20%20%23details.hidden,%0A%20%20%23main-content.hidden%20%7B%0A%20%20%20%20height%3A%200;%0A%20%20%20%20opacity%3A%200;%0A%20%20%20%20overflow%3A%20hidden;%0A%20%20%20%20padding-bottom%3A%200;%0A%20%20%20%20transition%3A%20none;%0A%20%20%7D%0A%0A%20%20h1%20%7B%0A%20%20%20%20font-size%3A%201.5em;%0A%20%20%20%20margin-bottom%3A%208px;%0A%20%20%7D%0A%0A%20%20.icon%20%7B%0A%20%20%20%20margin-bottom%3A%205.69vh;%0A%20%20%7D%0A%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20box-sizing%3A%20border-box;%0A%20%20%20%20margin%3A%207vh%20auto%2012px;%0A%20%20%20%20padding%3A%200%2024px;%0A%20%20%20%20position%3A%20relative;%0A%20%20%7D%0A%0A%20%20.interstitial-wrapper%20p%20%7B%0A%20%20%20%20font-size%3A%20.95em;%0A%20%20%20%20line-height%3A%201.61em;%0A%20%20%20%20margin-top%3A%208px;%0A%20%20%7D%0A%0A%20%20%23main-content%20%7B%0A%20%20%20%20margin%3A%200;%0A%20%20%20%20transition%3A%20opacity%20100ms%20cubic-bezier(0.4,%200,%200.2,%201);%0A%20%20%7D%0A%0A%20%20.small-link%20%7B%0A%20%20%20%20border%3A%200;%0A%20%20%7D%0A%0A%20%20.suggested-left%20%3E%20%23control-buttons,%0A%20%20.suggested-right%20%3E%20%23control-buttons%20%7B%0A%20%20%20%20float%3A%20none;%0A%20%20%20%20margin%3A%200;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-width%3A%20421px)%20and%20(min-height%3A%20500px)%20and%20(max-height%3A%20560px)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20margin-top%3A%2010vh;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-height%3A%20400px)%20and%20(orientation%3Aportrait)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20margin-bottom%3A%20145px;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-height%3A%20299px)%20%7B%0A%20%20.nav-wrapper%20%7B%0A%20%20%20%20padding-bottom%3A%2016px;%0A%20%20%7D%0A%7D%0A%0A@media%20(max-height%3A%20560px)%20and%20(min-height%3A%20240px)%20and%20(orientation%3Alandscape)%20%7B%0A%20%20.extended-reporting-has-checkbox%20%23details%20%7B%0A%20%20%20%20padding-bottom%3A%2080px;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-height%3A%20500px)%20and%20(max-height%3A%20650px)%20and%20(max-width%3A%20414px)%20and%0A%20%20%20%20%20%20%20(orientation%3A%20portrait)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20margin-top%3A%207vh;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-height%3A%20650px)%20and%20(max-width%3A%20414px)%20and%20(orientation%3A%20portrait)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20margin-top%3A%2010vh;%0A%20%20%7D%0A%7D%0A%0A/*%20Small%20mobile%20screens.%20No%20fixed%20nav.%20*/%0A@media%20(max-height%3A%20400px)%20and%20(orientation%3A%20portrait),%0A%20%20%20%20%20%20%20(max-height%3A%20239px)%20and%20(orientation%3A%20landscape),%0A%20%20%20%20%20%20%20(max-width%3A%20419px)%20and%20(max-height%3A%20399px)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20display%3A%20flex;%0A%20%20%20%20flex-direction%3A%20column;%0A%20%20%20%20margin-bottom%3A%200;%0A%20%20%7D%0A%0A%20%20%23details%20%7B%0A%20%20%20%20flex%3A%201%201%20auto;%0A%20%20%20%20order%3A%200;%0A%20%20%7D%0A%0A%20%20%23main-content%20%7B%0A%20%20%20%20flex%3A%201%201%20auto;%0A%20%20%20%20order%3A%200;%0A%20%20%7D%0A%0A%20%20.nav-wrapper%20%7B%0A%20%20%20%20flex%3A%200%201%20auto;%0A%20%20%20%20margin-top%3A%208px;%0A%20%20%20%20order%3A%201;%0A%20%20%20%20padding-inline-end%3A%200;%0A%20%20%20%20padding-inline-start%3A%200;%0A%20%20%20%20position%3A%20relative;%0A%20%20%20%20width%3A%20100%25;%0A%20%20%7D%0A%0A%20%20button,%0A%20%20.nav-wrapper%20.secondary-button%20%7B%0A%20%20%20%20padding%3A%2016px%2024px;%0A%20%20%7D%0A%0A%20%20button.small-link%20%7B%0A%20%20%20%20color%3A%20var(-%2Dgoogle-blue-600);%0A%20%20%7D%0A%7D%0A%0A@media%20(max-width%3A%20239px)%20and%20(orientation%3A%20portrait)%20%7B%0A%20%20.nav-wrapper%20%7B%0A%20%20%20%20padding-inline-end%3A%200;%0A%20%20%20%20padding-inline-start%3A%200;%0A%20%20%7D%0A%7D%0A%3C/style%3E%0A%20%20%20%20%3Cstyle%3E/*%20Copyright%202017%20The%20Chromium%20Authors%0A%20*%20Use%20of%20this%20source%20code%20is%20governed%20by%20a%20BSD-style%20license%20that%20can%20be%0A%20*%20found%20in%20the%20LICENSE%20file.%20*/%0A%0Abody%20%7B%0A%20%20background-color%3A%20var(-%2Dquiet-background-color);%0A%20%20margin%3A%200;%0A%7D%0A%0A%23details%20%7B%0A%20%20box-sizing%3A%20border-box;%0A%20%20color%3A%20var(-%2Dtext-color);%0A%20%20font-family%3A%20Roboto-Regular,%20sans-serif;%0A%20%20font-size%3A%200.93333em;%0A%20%20height%3A%20auto;%0A%20%20line-height%3A%201.48em;%0A%20%20margin%3A%200;%0A%20%20opacity%3A%201;%0A%20%20transition%3A%20opacity%20250ms%20cubic-bezier(0.4,%200,%200.2,%201);%0A%7D%0A%0A%23details.hidden%20%7B%0A%20%20display%3A%20block;%0A%20%20height%3A%200;%0A%20%20opacity%3A%200;%0A%20%20overflow%3A%20hidden;%0A%20%20padding-bottom%3A%200;%0A%20%20transition%3A%20none;%0A%0A%7D%0A%0A%23details-link%20%7B%0A%20%20color%3A%20var(-%2Dlink-color);%0A%20%20text-decoration%3A%20underline;%0A%20%20text-transform%3A%20none;%0A%7D%0A%0Ah1%20%7B%0A%20%20color%3A%20var(-%2Dheading-color);%0A%20%20font-family%3A%20Roboto-Regular,%20sans-serif;%0A%20%20font-size%3A%200.93333em;%0A%20%20font-weight%3A%20normal;%0A%20%20line-height%3A%201.4em;%0A%20%20margin%3A%208px%200%208px;%0A%7D%0A%0A.giant%20.icon%20%7B%0A%20%20bottom%3A%200;%0A%20%20left%3A%200;%0A%20%20margin%3A%20auto;%0A%20%20position%3A%20fixed;%0A%20%20right%3A%200;%0A%20%20top%3A%200;%0A%7D%0A%0A.giant%20%23details,%0A.giant%20%23main-message%20%7B%0A%20%20display%3A%20none;%0A%7D%0A%0A.icon%20%7B%0A%20%20background-image%3A%20url(data%3Aimage/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0tMi00aDI0djI0SC0yeiIvPjxwYXRoIGQ9Ik0xOCAwYzEgMCAyIDEgMiAydjEyYzAgMS0xIDItMiAySDJjLTEuMSAwLTItLjktMi0yVjJjMC0xIDEtMiAyLTJoMTZ6bS01LjYwOCAxMS40NiAxLjEwMy0xLjEwMi0yLjM3NC0yLjM3MkwxMy41IDUuNjA4bC0xLjEwMy0xLjEwMi0yLjM4IDIuMzc4TDcuNjMyIDQuNSA2LjUyOSA1LjYwMmwyLjM4NiAyLjM4NEw2LjUgMTAuMzk4IDcuNjAzIDExLjVsMi40MTQtMi40MTMgMi4zNzUgMi4zNzN6IiBmaWxsLW9wYWNpdHk9Ii4yIiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==);%0A%20%20background-position%3A%20center;%0A%20%20height%3A%2020vh;%0A%20%20margin%3A%200%20auto;%0A%20%20max-height%3A%2048px;%0A%20%20max-width%3A%2048px;%0A%20%20min-height%3A%2018px;%0A%20%20min-width%3A%2018px;%0A%20%20opacity%3A%20.54;%0A%20%20width%3A%2020vh;%0A%7D%0A%0A.heavy-ad%20.icon%20%7B%0A%20%20background-image%3A%20url(data%3Aimage/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS02MTgtNDQwSDc4MnYzNjAwSC02MTh6TTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Ik0xOSAzSDVjLTEuMSAwLTIgLjktMiAydjE0YzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJWNWMwLTEuMS0uOS0yLTItMnptMCAxNkg1VjhoMTR2MTF6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+PHBhdGggZD0ibTE0LjM5MiAxNi44MiAxLjEwMy0xLjEwMi0yLjM3NC0yLjM3MiAyLjM3OS0yLjM3OC0xLjEwMy0xLjEwMi0yLjM4IDIuMzc4TDkuNjMyIDkuODZsLTEuMTAzIDEuMTAyIDIuMzg2IDIuMzg0TDguNSAxNS43NThsMS4xMDMgMS4xMDIgMi40MTQtMi40MTN6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+PC9zdmc+);%0A%7D%0A%0A.interstitial-wrapper%20%7B%0A%20%20align-items%3A%20center;%0A%20%20box-sizing%3A%20border-box;%0A%20%20display%3A%20flex;%0A%20%20flex-direction%3A%20column;%0A%20%20height%3A%20100vh;%0A%20%20justify-content%3A%20center;%0A%20%20line-height%3A%201.6em;%0A%20%20margin%3A%200%20auto;%0A%20%20max-width%3A%20480px;%0A%20%20padding%3A%2016px;%0A%20%20width%3A%20100%25;%0A%7D%0A%0A%23main-content%20%7B%0A%20%20align-self%3A%20auto;%0A%20%20flex%3A%200%201%20auto;%0A%20%20text-align%3A%20center;%0A%7D%0A%0A@media%20(max-height%3A2em),%0A%20%20%20%20%20%20%20(max-width%3A2em)%20%7B%0A%20%20.icon%20%7B%0A%20%20%20%20display%3A%20none;%0A%20%20%7D%0A%7D%0A%0A@media%20(min-height%3A25em)%20and%20(min-width%3A37.5em),%0A%20%20%20%20%20%20%20(min-height%3A37.5em)%20and%20(min-width%3A25em)%20%7B%0A%20%20.interstitial-wrapper%20%7B%0A%20%20%20%20padding%3A%2048px;%0A%20%20%7D%0A%7D%0A%0A/*%20Views%20that%20don't%20fit%20the%20details%20text.%20*/%0A@media%20(max-height%3A11.25em)%20and%20(max-width%3A18.75em),%0A%20%20%20%20%20%20%20(max-height%3A18.75em)%20and%20(max-width%3A11.25em),%0A%20%20%20%20%20%20%20(max-height%3A5em),%0A%20%20%20%20%20%20%20(max-width%3A5em)%20%7B%0A%20%20.icon%20%7B%0A%20%20%20%20max-height%3A%2024px;%0A%20%20%20%20max-width%3A%2024px;%0A%20%20%7D%0A%0A%20%20%23details,%0A%20%20%23main-message%20%7B%0A%20%20%20%20display%3A%20none;%0A%20%20%7D%0A%7D%0A%0A@media%20(prefers-color-scheme%3A%20dark)%20%7B%0A%20%20.dark-mode-available%20.icon%20%7B%0A%20%20%20%20filter%3A%20invert(1);%0A%20%20%7D%0A%7D%0A%3C/style%3E%0A%20%20%20%20%3Cstyle%3E%0A%20%20%20%20%20%20path%20%7B%0A%20%20%20%20%20%20%20%20fill-opacity%3A%200.2;%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20.icon%20%7B%0A%20%20%20%20%20%20%20%20background-image%3A%20none;%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20button,%0A%20%20%20%20%20%20%5Bdir='rtl'%5D%20button%20%7B%0A%20%20%20%20%20%20%20%20float%3A%20none;%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%3C/style%3E%0A%20%20%3C/head%3E%0A%20%20%3Cbody%20class=%22pdf%22%3E%0A%20%20%20%20%3Cdiv%20class=%22interstitial-wrapper%22%3E%0A%20%20%20%20%20%20%3Cdiv%20id=%22main-content%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class=%22icon%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3C!-%2D%20Material%20Design%20PDF%20icon%20-%2D%3E%0A%20%20%20%20%20%20%20%20%20%20%3Csvg%20viewBox=%220%200%2024%2024%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d=%22M7%2011.5h1v-1H7v1zM19%203H5c-1.1%200-2%20.9-2%202v14c0%201.1.9%202%202%202h14c1.1%200%202-.9%202-2V5c0-1.1-.9-2-2-2zm-9.5%208.5c0%20.83-.67%201.5-1.5%201.5H7v2H5.5V9H8c.83%200%201.5.67%201.5%201.5v1zm10-1H17v1h1.5V13H17v2h-1.5V9h4v1.5zm-5%203c0%20.83-.67%201.5-1.5%201.5h-2.5V9H13c.83%200%201.5.67%201.5%201.5v3zm-2.5%200h1v-3h-1v3z%22%3E%3C/path%3E%0A%20%20%20%20%20%20%20%20%20%20%3C/svg%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20id=%22main-message%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ch1%3EDST_%25D0%2591%25D0%25BB%25D0%25BE%25D0%25BA_4_%25D0%259C%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C_ML-5._%25D0%2592%25D0%25B0%25D0%25BB%25D0%25B8%25D0%25B4%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F_%25D0%25B4%25D0%25B0%25D0%25BD%25D0%25BD%25D1%258B%25D1%2585_%25D0%25B8_%25D0%25BE%25D1%2586%25D0%25B5%25D0%25BD%25D0%25BA%25D0%25B0_%25D0%25BC%25D0%25BE%25D0%25B4%25D0%25B5%25D0%25BB%25D0%25B5%25D0%25B9.pdf%3C/h1%3E%0A%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%3Ca%20href=%22https%3A//lms-cdn.skillfactory.ru/assets/courseware/v1/7edba8ea4b312c39ddd9701e92f9fa33/asset-v1%3ASkillFactory+DST-3.0+28FEB2021+type@asset+block/DST_%25D0%2591%25D0%25BB%25D0%25BE%25D0%25BA_4_%25D0%259C%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C_ML-5._%25D0%2592%25D0%25B0%25D0%25BB%25D0%25B8%25D0%25B4%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F_%25D0%25B4%25D0%25B0%25D0%25BD%25D0%25BD%25D1%258B%25D1%2585_%25D0%25B8_%25D0%25BE%25D1%2586%25D0%25B5%25D0%25BD%25D0%25BA%25D0%25B0_%25D0%25BC%25D0%25BE%25D0%25B4%25D0%25B5%25D0%25BB%25D0%25B5%25D0%25B9.pdf%22%20target=%22_blank%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cbutton%20id=%22open-button%22%20tabindex=%221%22%3E%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C%3C/button%3E%0A%20%20%20%20%20%20%20%20%3C/a%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/div%3E%0A%20%20%3C/body%3E%0A%3C/html%3E%0A%3Cstyle%3E/*%20Copyright%202014%20The%20Chromium%20Authors%0A%20*%20Use%20of%20this%20source%20code%20is%20governed%20by%20a%20BSD-style%20license%20that%20can%20be%0A%20*%20found%20in%20the%20LICENSE%20file.%20*/%0A%0A/*%20This%20file%20is%20dynamically%20processed%20by%20a%20C++%20data%20source%20handler%20to%20fill%20in%0A%20*%20some%20per-platform/locale%20styles%20that%20dramatically%20alter%20the%20page.%20This%20is%0A%20*%20done%20to%20reduce%20flicker,%20as%20JS%20may%20not%20run%20before%20the%20page%20is%20rendered.%0A%20*%0A%20*%20There%20are%20two%20ways%20to%20include%20this%20stylesheet%3A%0A%20*%201.%20via%20its%20chrome%3A//resources/%20URL%20in%20HTML,%20i.e.%3A%0A%20*%0A%20*%20%20%20%3Clink%20rel=%22stylesheet%22%20href=%22chrome%3A//resources/css/text_defaults.css%22%3E%0A%20*%0A%20*%202.%20via%20the%20webui%3A%3AAppendWebUICSSTextDefaults()%20method%20to%20directly%20append%20it%0A%20*%20to%20an%20HTML%20string.%0A%20*%20Otherwise%20its%20placeholders%20won't%20be%20expanded.%20*/%0A%0Abody%20%7B%0A%20%20font-family%3A%20'Yandex%20Sans%20Text',%20Segoe%20UI,%20sans-serif;%0A%20%20font-size%3A%2075%25;%0A%0A%20%20-%2Ddefault-font-family%3A%20'Yandex%20Sans%20Text',%20Segoe%20UI,%20sans-serif;%0A%7D%0A%0Abutton%20%7B%0A%20%20font-family%3A%20'Yandex%20Sans%20Text',%20Segoe%20UI,%20sans-serif;%0A%7D%0A%3C/style%3E%3Cscript%3E//%20Copyright%202012%20The%20Chromium%20Authors%0A//%20Use%20of%20this%20source%20code%20is%20governed%20by%20a%20BSD-style%20license%20that%20can%20be%0A//%20found%20in%20the%20LICENSE%20file.%0A%22use%20strict%22;var%20loadTimeData;class%20LoadTimeData%7Bconstructor()%7Bthis.data_=null%7Dset%20data(value)%7Bexpect(!this.data_,%22Re-setting%20data.%22);this.data_=value%7DvalueExists(id)%7Breturn%20id%20in%20this.data_%7DgetValue(id)%7Bexpect(this.data_,%22No%20data.%20Did%20you%20remember%20to%20include%20strings.js%3F%22);const%20value=this.data_%5Bid%5D;expect(typeof%20value!==%22undefined%22,%22Could%20not%20find%20value%20for%20%22+id);return%20value%7DgetString(id)%7Bconst%20value=this.getValue(id);expectIsType(id,value,%22string%22);return%20value%7DgetStringF(id,var_args)%7Bconst%20value=this.getString(id);if(!value)%7Breturn%22%22%7Dconst%20args=Array.prototype.slice.call(arguments);args%5B0%5D=value;return%20this.substituteString.apply(this,args)%7DsubstituteString(label,var_args)%7Bconst%20varArgs=arguments;return%20label.replace(/%5C$(.%7C$%7C%5Cn)/g,(function(m)%7Bexpect(m.match(/%5C$%5B$1-9%5D/),%22Unescaped%20$%20found%20in%20localized%20string.%22);return%20m===%22$$%22%3F%22$%22%3AvarArgs%5Bm%5B1%5D%5D%7D))%7DgetBoolean(id)%7Bconst%20value=this.getValue(id);expectIsType(id,value,%22boolean%22);return%20value%7DgetInteger(id)%7Bconst%20value=this.getValue(id);expectIsType(id,value,%22number%22);expect(value===Math.floor(value),%22Number%20isn't%20integer%3A%20%22+value);return%20value%7DoverrideValues(replacements)%7Bexpect(typeof%20replacements===%22object%22,%22Replacements%20must%20be%20a%20dictionary%20object.%22);for(const%20key%20in%20replacements)%7Bthis.data_%5Bkey%5D=replacements%5Bkey%5D%7D%7D%7Dfunction%20expect(condition,message)%7Bif(!condition)%7Bthrow%20new%20Error(%22Unexpected%20condition%20on%20%22+document.location.href+%22%3A%20%22+message)%7D%7Dfunction%20expectIsType(id,value,type)%7Bexpect(typeof%20value===type,%22%5B%22+value+%22%5D%20(%22+id+%22)%20is%20not%20a%20%22+type)%7Dexpect(!loadTimeData,%22should%20only%20include%20this%20file%20once%22);loadTimeData=new%20LoadTimeData;window.loadTimeData=loadTimeData;console.warn(%22crbug/1173575,%20non-JS%20module%20files%20deprecated.%22);%3C/script%3E%3Cscript%3EloadTimeData.data%20=%20%7B%22fileName%22%3A%22DST_%25D0%2591%25D0%25BB%25D0%25BE%25D0%25BA_4_%25D0%259C%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C_ML-5._%25D0%2592%25D0%25B0%25D0%25BB%25D0%25B8%25D0%25B4%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F_%25D0%25B4%25D0%25B0%25D0%25BD%25D0%25BD%25D1%258B%25D1%2585_%25D0%25B8_%25D0%25BE%25D1%2586%25D0%25B5%25D0%25BD%25D0%25BA%25D0%25B0_%25D0%25BC%25D0%25BE%25D0%25B4%25D0%25B5%25D0%25BB%25D0%25B5%25D0%25B9.pdf%22,%22open%22%3A%22%D0%9E%D1%82%D0%BA%D1%80%D1%8B%D1%82%D1%8C%22,%22pdfUrl%22%3A%22https%3A//lms-cdn.skillfactory.ru/assets/courseware/v1/7edba8ea4b312c39ddd9701e92f9fa33/asset-v1%3ASkillFactory+DST-3.0+28FEB2021+type@asset+block/DST_%25D0%2591%25D0%25BB%25D0%25BE%25D0%25BA_4_%25D0%259C%25D0%25BE%25D0%25B4%25D1%2583%25D0%25BB%25D1%258C_ML-5._%25D0%2592%25D0%25B0%25D0%25BB%25D0%25B8%25D0%25B4%25D0%25B0%25D1%2586%25D0%25B8%25D1%258F_%25D0%25B4%25D0%25B0%25D0%25BD%25D0%25BD%25D1%258B%25D1%2585_%25D0%25B8_%25D0%25BE%25D1%2586%25D0%25B5%25D0%25BD%25D0%25BA%25D0%25B0_%25D0%25BC%25D0%25BE%25D0%25B4%25D0%25B5%25D0%25BB%25D0%25B5%25D0%25B9.pdf%22%7D;%3C/script%3E -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width">
+    <script>
+      // If this page is embedded in a WebViewPlugin, the 'window.plugin'
+      // object is externally defined, and we trigger the download that way.
+      if (window.plugin !== undefined) {
+        window.addEventListener('DOMContentLoaded', function () {
+          let button = document.getElementById('open-button');
+          button.addEventListener('click', function(e) {
+            window.plugin.openPDF();
+            e.preventDefault();
+          });
+
+          if (plugin.notifyPlaceholderReadyForTesting)
+            plugin.notifyPlaceholderReadyForTesting();
+        });
+      }
+
+      window.onkeydown = function(e) {
+        if (e.key == 'Enter' || e.key == ' ') {
+          document.getElementById('open-button').click();
+          e.preventDefault();
+        }
+      };
+    </script>
+    <style>/* Copyright 2017 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+a {
+  color: var(--link-color);
+}
+
+body {
+  --background-color: #fff;
+  --error-code-color: var(--google-gray-700);
+  --google-blue-50: rgb(232, 240, 254);
+  --google-blue-100: rgb(210, 227, 252);
+  --google-blue-300: rgb(138, 180, 248);
+  --google-blue-600: rgb(26, 115, 232);
+  --google-blue-700: rgb(25, 103, 210);
+  --google-gray-100: rgb(241, 243, 244);
+  --google-gray-300: rgb(218, 220, 224);
+  --google-gray-500: rgb(154, 160, 166);
+  --google-gray-50: rgb(248, 249, 250);
+  --google-gray-600: rgb(128, 134, 139);
+  --google-gray-700: rgb(95, 99, 104);
+  --google-gray-800: rgb(60, 64, 67);
+  --google-gray-900: rgb(32, 33, 36);
+  --heading-color: var(--google-gray-900);
+  --link-color: rgb(88, 88, 88);
+  --primary-button-fill-color-active: var(--google-blue-700);
+  --primary-button-fill-color: var(--google-blue-600);
+  --primary-button-text-color: #fff;
+  --quiet-background-color: rgb(247, 247, 247);
+  --secondary-button-border-color: var(--google-gray-500);
+  --secondary-button-fill-color: #fff;
+  --secondary-button-hover-border-color: var(--google-gray-600);
+  --secondary-button-hover-fill-color: var(--google-gray-50);
+  --secondary-button-text-color: var(--google-gray-700);
+  --small-link-color: var(--google-gray-700);
+  --text-color: var(--google-gray-700);
+  background: var(--background-color);
+  color: var(--text-color);
+  word-wrap: break-word;
+}
+
+
+
+.hidden {
+  display: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 125%;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --background-color: var(--google-gray-900);
+    --error-code-color: var(--google-gray-500);
+    --heading-color: var(--google-gray-500);
+    --link-color: var(--google-blue-300);
+    --primary-button-fill-color-active: rgb(129, 162, 208);
+    --primary-button-fill-color: var(--google-blue-300);
+    --primary-button-text-color: var(--google-gray-900);
+    --quiet-background-color: var(--background-color);
+    --secondary-button-border-color: var(--google-gray-700);
+    --secondary-button-fill-color: var(--google-gray-900);
+    --secondary-button-hover-fill-color: rgb(48, 51, 57);
+    --secondary-button-text-color: var(--google-blue-300);
+    --small-link-color: var(--google-blue-300);
+    --text-color: var(--google-gray-500);
+  }
+}
+
+/* Apply Yandex CSS patch. */
+
+body {
+  --yandex-yellow-100: #ffcc00;
+  --yandex-yellow-300: #ffa400;
+  --yandex-black: #000;
+}
+
+body.pdf {
+  --primary-button-fill-color-active: var(--yandex-yellow-300);
+  --primary-button-fill-color: var(--yandex-yellow-100);
+  --primary-button-text-color: var(--yandex-black);
+}
+</style>
+    <style>/* Copyright 2014 The Chromium Authors
+   Use of this source code is governed by a BSD-style license that can be
+   found in the LICENSE file. */
+
+button {
+  border: 0;
+  border-radius: 20px;
+  box-sizing: border-box;
+  color: var(--primary-button-text-color);
+  cursor: pointer;
+  float: right;
+  font-size: .875em;
+  margin: 0;
+  padding: 8px 16px;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+[dir='rtl'] button {
+  float: left;
+}
+
+.bad-clock button,
+.captive-portal button,
+.https-only button,
+.insecure-form button,
+.lookalike-url button,
+.main-frame-blocked button,
+.neterror button,
+.pdf button,
+.ssl button,
+.enterprise-block button,
+.enterprise-warn button,
+.managed-profile-required button,
+.safe-browsing-billing button,
+.supervised-user-verify button,
+.supervised-user-verify-subframe button {
+  background: var(--primary-button-fill-color);
+}
+
+button:active {
+  background: var(--primary-button-fill-color-active);
+  outline: 0;
+}
+
+#debugging {
+  display: inline;
+  overflow: auto;
+}
+
+.debugging-content {
+  line-height: 1em;
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
+.debugging-content-fixed-width {
+  display: block;
+  font-family: monospace;
+  font-size: 1.2em;
+  margin-top: 0.5em;
+}
+
+.debugging-title {
+  font-weight: bold;
+}
+
+#details {
+  margin: 0 0 50px;
+}
+
+#details p:not(:first-of-type) {
+  margin-top: 20px;
+}
+
+.secondary-button:active {
+  border-color: white;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3),
+      0 2px 6px 2px rgba(60, 64, 67, .15);
+}
+
+.secondary-button:hover {
+  background: var(--secondary-button-hover-fill-color);
+  border-color: var(--secondary-button-hover-border-color);
+  text-decoration: none;
+}
+
+.error-code {
+  color: var(--error-code-color);
+  font-size: .8em;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+#error-debugging-info {
+  font-size: 0.8em;
+}
+
+h1 {
+  color: var(--heading-color);
+  font-size: 1.6em;
+  font-weight: normal;
+  line-height: 1.25em;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
+.icon {
+  height: 72px;
+  margin: 0 0 40px;
+  width: 72px;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+}
+
+input[type=checkbox]:focus ~ .checkbox::after {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.interstitial-wrapper {
+  box-sizing: border-box;
+  font-size: 1em;
+  line-height: 1.6em;
+  margin: 14vh auto 0;
+  max-width: 600px;
+  width: 100%;
+}
+
+#main-message > p {
+  display: inline;
+}
+
+#extended-reporting-opt-in {
+  font-size: .875em;
+  margin-top: 32px;
+}
+
+#extended-reporting-opt-in label {
+  display: grid;
+  grid-template-columns: 1.8em 1fr;
+  position: relative;
+}
+
+#enhanced-protection-message {
+  border-radius: 20px;
+  font-size: 1em;
+  margin-top: 32px;
+  padding: 10px 5px;
+}
+
+#enhanced-protection-message a {
+  color: var(--google-red-10);
+}
+
+#enhanced-protection-message label {
+  display: grid;
+  grid-template-columns: 2.5em 1fr;
+  position: relative;
+}
+
+#enhanced-protection-message div {
+  margin: 0.5em;
+}
+
+#enhanced-protection-message .icon {
+  height: 1.5em;
+  vertical-align: middle;
+  width: 1.5em;
+}
+
+.nav-wrapper {
+  margin-top: 51px;
+}
+
+.nav-wrapper::after {
+  clear: both;
+  content: '';
+  display: table;
+  width: 100%;
+}
+
+.small-link {
+  color: var(--small-link-color);
+  font-size: .875em;
+}
+
+.checkboxes {
+  flex: 0 0 24px;
+}
+
+.checkbox {
+  --padding: .9em;
+  background: transparent;
+  display: block;
+  height: 1em;
+  left: -1em;
+  padding-inline-start: var(--padding);
+  position: absolute;
+  right: 0;
+  top: -.5em;
+  width: 1em;
+}
+
+.checkbox::after {
+  border: 1px solid white;
+  border-radius: 2px;
+  content: '';
+  height: 1em;
+  left: var(--padding);
+  position: absolute;
+  top: var(--padding);
+  width: 1em;
+}
+
+.checkbox::before {
+  background: transparent;
+  border: 2px solid white;
+  border-inline-end-width: 0;
+  border-top-width: 0;
+  content: '';
+  height: .2em;
+  left: calc(.3em + var(--padding));
+  opacity: 0;
+  position: absolute;
+  top: calc(.3em  + var(--padding));
+  transform: rotate(-45deg);
+  width: .5em;
+}
+
+input[type=checkbox]:checked ~ .checkbox::before {
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .interstitial-wrapper {
+    padding: 0 10%;
+  }
+
+  #error-debugging-info {
+    overflow: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  button,
+  [dir='rtl'] button,
+  .small-link {
+    float: none;
+    font-size: .825em;
+    font-weight: 500;
+    margin: 0;
+    width: 100%;
+  }
+
+  button {
+    padding: 16px 24px;
+  }
+
+  #details {
+    margin: 20px 0 20px 0;
+  }
+
+  #details p:not(:first-of-type) {
+    margin-top: 10px;
+  }
+
+  .secondary-button:not(.hidden) {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .interstitial-wrapper {
+    padding: 0 5%;
+  }
+
+  #extended-reporting-opt-in {
+    margin-top: 24px;
+  }
+
+  #enhanced-protection-message {
+    margin-top: 24px;
+  }
+
+  .nav-wrapper {
+    margin-top: 30px;
+  }
+}
+
+/**
+ * Mobile specific styling.
+ * Navigation buttons are anchored to the bottom of the screen.
+ * Details message replaces the top content in its own scrollable area.
+ */
+
+@media (max-width: 420px) {
+  .nav-wrapper .secondary-button {
+    border: 0;
+    margin: 16px 0 0;
+    margin-inline-end: 0;
+    padding-bottom: 16px;
+    padding-top: 16px;
+  }
+}
+
+/* Fixed nav. */
+@media (min-width: 240px) and (max-width: 420px) and
+       (min-height: 401px),
+       (min-width: 421px) and (min-height: 240px) and
+       (max-height: 560px) {
+  body .nav-wrapper {
+    background: var(--background-color);
+    bottom: 0;
+    box-shadow: 0 -12px 24px var(--background-color);
+    left: 0;
+    margin: 0 auto;
+    max-width: 736px;
+    padding-inline-end: 24px;
+    padding-inline-start: 24px;
+    position: fixed;
+    right: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .interstitial-wrapper {
+    max-width: 736px;
+  }
+
+  #details,
+  #main-content {
+    padding-bottom: 40px;
+  }
+
+  #details {
+    padding-top: 5.5vh;
+  }
+
+  button.small-link {
+    color: var(--google-blue-600);
+  }
+}
+
+@media (max-width: 420px) and (orientation: portrait),
+       (max-height: 560px) {
+  body {
+    margin: 0 auto;
+  }
+
+  button,
+  [dir='rtl'] button,
+  button.small-link,
+  .nav-wrapper .secondary-button {
+    font-family: Roboto-Regular,Helvetica;
+    font-size: .933em;
+    margin: 6px 0;
+    transform: translatez(0);
+  }
+
+  .nav-wrapper {
+    box-sizing: border-box;
+    padding-bottom: 8px;
+    width: 100%;
+  }
+
+  #details {
+    box-sizing: border-box;
+    height: auto;
+    margin: 0;
+    opacity: 1;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #details.hidden,
+  #main-content.hidden {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-bottom: 0;
+    transition: none;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+  }
+
+  .icon {
+    margin-bottom: 5.69vh;
+  }
+
+  .interstitial-wrapper {
+    box-sizing: border-box;
+    margin: 7vh auto 12px;
+    padding: 0 24px;
+    position: relative;
+  }
+
+  .interstitial-wrapper p {
+    font-size: .95em;
+    line-height: 1.61em;
+    margin-top: 8px;
+  }
+
+  #main-content {
+    margin: 0;
+    transition: opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .small-link {
+    border: 0;
+  }
+
+  .suggested-left > #control-buttons,
+  .suggested-right > #control-buttons {
+    float: none;
+    margin: 0;
+  }
+}
+
+@media (min-width: 421px) and (min-height: 500px) and (max-height: 560px) {
+  .interstitial-wrapper {
+    margin-top: 10vh;
+  }
+}
+
+@media (min-height: 400px) and (orientation:portrait) {
+  .interstitial-wrapper {
+    margin-bottom: 145px;
+  }
+}
+
+@media (min-height: 299px) {
+  .nav-wrapper {
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-height: 560px) and (min-height: 240px) and (orientation:landscape) {
+  .extended-reporting-has-checkbox #details {
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-height: 500px) and (max-height: 650px) and (max-width: 414px) and
+       (orientation: portrait) {
+  .interstitial-wrapper {
+    margin-top: 7vh;
+  }
+}
+
+@media (min-height: 650px) and (max-width: 414px) and (orientation: portrait) {
+  .interstitial-wrapper {
+    margin-top: 10vh;
+  }
+}
+
+/* Small mobile screens. No fixed nav. */
+@media (max-height: 400px) and (orientation: portrait),
+       (max-height: 239px) and (orientation: landscape),
+       (max-width: 419px) and (max-height: 399px) {
+  .interstitial-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  #details {
+    flex: 1 1 auto;
+    order: 0;
+  }
+
+  #main-content {
+    flex: 1 1 auto;
+    order: 0;
+  }
+
+  .nav-wrapper {
+    flex: 0 1 auto;
+    margin-top: 8px;
+    order: 1;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+    position: relative;
+    width: 100%;
+  }
+
+  button,
+  .nav-wrapper .secondary-button {
+    padding: 16px 24px;
+  }
+
+  button.small-link {
+    color: var(--google-blue-600);
+  }
+}
+
+@media (max-width: 239px) and (orientation: portrait) {
+  .nav-wrapper {
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+  }
+}
+</style>
+    <style>/* Copyright 2017 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+body {
+  background-color: var(--quiet-background-color);
+  margin: 0;
+}
+
+#details {
+  box-sizing: border-box;
+  color: var(--text-color);
+  font-family: Roboto-Regular, sans-serif;
+  font-size: 0.93333em;
+  height: auto;
+  line-height: 1.48em;
+  margin: 0;
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#details.hidden {
+  display: block;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  transition: none;
+
+}
+
+#details-link {
+  color: var(--link-color);
+  text-decoration: underline;
+  text-transform: none;
+}
+
+h1 {
+  color: var(--heading-color);
+  font-family: Roboto-Regular, sans-serif;
+  font-size: 0.93333em;
+  font-weight: normal;
+  line-height: 1.4em;
+  margin: 8px 0 8px;
+}
+
+.giant .icon {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.giant #details,
+.giant #main-message {
+  display: none;
+}
+
+.icon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0tMi00aDI0djI0SC0yeiIvPjxwYXRoIGQ9Ik0xOCAwYzEgMCAyIDEgMiAydjEyYzAgMS0xIDItMiAySDJjLTEuMSAwLTItLjktMi0yVjJjMC0xIDEtMiAyLTJoMTZ6bS01LjYwOCAxMS40NiAxLjEwMy0xLjEwMi0yLjM3NC0yLjM3MkwxMy41IDUuNjA4bC0xLjEwMy0xLjEwMi0yLjM4IDIuMzc4TDcuNjMyIDQuNSA2LjUyOSA1LjYwMmwyLjM4NiAyLjM4NEw2LjUgMTAuMzk4IDcuNjAzIDExLjVsMi40MTQtMi40MTMgMi4zNzUgMi4zNzN6IiBmaWxsLW9wYWNpdHk9Ii4yIiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==);
+  background-position: center;
+  height: 20vh;
+  margin: 0 auto;
+  max-height: 48px;
+  max-width: 48px;
+  min-height: 18px;
+  min-width: 18px;
+  opacity: .54;
+  width: 20vh;
+}
+
+.heavy-ad .icon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS02MTgtNDQwSDc4MnYzNjAwSC02MTh6TTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Ik0xOSAzSDVjLTEuMSAwLTIgLjktMiAydjE0YzAgMS4xLjkgMiAyIDJoMTRjMS4xIDAgMi0uOSAyLTJWNWMwLTEuMS0uOS0yLTItMnptMCAxNkg1VjhoMTR2MTF6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+PHBhdGggZD0ibTE0LjM5MiAxNi44MiAxLjEwMy0xLjEwMi0yLjM3NC0yLjM3MiAyLjM3OS0yLjM3OC0xLjEwMy0xLjEwMi0yLjM4IDIuMzc4TDkuNjMyIDkuODZsLTEuMTAzIDEuMTAyIDIuMzg2IDIuMzg0TDguNSAxNS43NThsMS4xMDMgMS4xMDIgMi40MTQtMi40MTN6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+PC9zdmc+);
+}
+
+.interstitial-wrapper {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  line-height: 1.6em;
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 16px;
+  width: 100%;
+}
+
+#main-content {
+  align-self: auto;
+  flex: 0 1 auto;
+  text-align: center;
+}
+
+@media (max-height:2em),
+       (max-width:2em) {
+  .icon {
+    display: none;
+  }
+}
+
+@media (min-height:25em) and (min-width:37.5em),
+       (min-height:37.5em) and (min-width:25em) {
+  .interstitial-wrapper {
+    padding: 48px;
+  }
+}
+
+/* Views that don't fit the details text. */
+@media (max-height:11.25em) and (max-width:18.75em),
+       (max-height:18.75em) and (max-width:11.25em),
+       (max-height:5em),
+       (max-width:5em) {
+  .icon {
+    max-height: 24px;
+    max-width: 24px;
+  }
+
+  #details,
+  #main-message {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark-mode-available .icon {
+    filter: invert(1);
+  }
+}
+</style>
+    <style>
+      path {
+        fill-opacity: 0.2;
+      }
+
+      .icon {
+        background-image: none;
+      }
+
+      button,
+      [dir='rtl'] button {
+        float: none;
+      }
+    </style>
+  </head>
+  <body class="pdf">
+    <div class="interstitial-wrapper">
+      <div id="main-content">
+        <div class="icon">
+          <!-- Material Design PDF icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M7 11.5h1v-1H7v1zM19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9.5 8.5c0 .83-.67 1.5-1.5 1.5H7v2H5.5V9H8c.83 0 1.5.67 1.5 1.5v1zm10-1H17v1h1.5V13H17v2h-1.5V9h4v1.5zm-5 3c0 .83-.67 1.5-1.5 1.5h-2.5V9H13c.83 0 1.5.67 1.5 1.5v3zm-2.5 0h1v-3h-1v3z"></path>
+          </svg>
+        </div>
+        <div id="main-message">
+          <h1>DST_%D0%91%D0%BB%D0%BE%D0%BA_4_%D0%9C%D0%BE%D0%B4%D1%83%D0%BB%D1%8C_ML-5._%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B8_%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9.pdf</h1>
+        </div>
+        <a href="https://lms-cdn.skillfactory.ru/assets/courseware/v1/7edba8ea4b312c39ddd9701e92f9fa33/asset-v1:SkillFactory+DST-3.0+28FEB2021+type@asset+block/DST_%D0%91%D0%BB%D0%BE%D0%BA_4_%D0%9C%D0%BE%D0%B4%D1%83%D0%BB%D1%8C_ML-5._%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B8_%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9.pdf" target="_blank">
+          <button id="open-button" tabindex="1">Открыть</button>
+        </a>
+      </div>
+    </div>
+  
+
+<style>/* Copyright 2014 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* This file is dynamically processed by a C++ data source handler to fill in
+ * some per-platform/locale styles that dramatically alter the page. This is
+ * done to reduce flicker, as JS may not run before the page is rendered.
+ *
+ * There are two ways to include this stylesheet:
+ * 1. via its chrome://resources/ URL in HTML, i.e.:
+ *
+ *   <link rel="stylesheet" href="chrome://resources/css/text_defaults.css">
+ *
+ * 2. via the webui::AppendWebUICSSTextDefaults() method to directly append it
+ * to an HTML string.
+ * Otherwise its placeholders won't be expanded. */
+
+body {
+  font-family: 'Yandex Sans Text', Segoe UI, sans-serif;
+  font-size: 75%;
+
+  --default-font-family: 'Yandex Sans Text', Segoe UI, sans-serif;
+}
+
+button {
+  font-family: 'Yandex Sans Text', Segoe UI, sans-serif;
+}
+</style><script>// Copyright 2012 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+"use strict";var loadTimeData;class LoadTimeData{constructor(){this.data_=null}set data(value){expect(!this.data_,"Re-setting data.");this.data_=value}valueExists(id){return id in this.data_}getValue(id){expect(this.data_,"No data. Did you remember to include strings.js?");const value=this.data_[id];expect(typeof value!=="undefined","Could not find value for "+id);return value}getString(id){const value=this.getValue(id);expectIsType(id,value,"string");return value}getStringF(id,var_args){const value=this.getString(id);if(!value){return""}const args=Array.prototype.slice.call(arguments);args[0]=value;return this.substituteString.apply(this,args)}substituteString(label,var_args){const varArgs=arguments;return label.replace(/\$(.|$|\n)/g,(function(m){expect(m.match(/\$[$1-9]/),"Unescaped $ found in localized string.");return m==="$$"?"$":varArgs[m[1]]}))}getBoolean(id){const value=this.getValue(id);expectIsType(id,value,"boolean");return value}getInteger(id){const value=this.getValue(id);expectIsType(id,value,"number");expect(value===Math.floor(value),"Number isn't integer: "+value);return value}overrideValues(replacements){expect(typeof replacements==="object","Replacements must be a dictionary object.");for(const key in replacements){this.data_[key]=replacements[key]}}}function expect(condition,message){if(!condition){throw new Error("Unexpected condition on "+document.location.href+": "+message)}}function expectIsType(id,value,type){expect(typeof value===type,"["+value+"] ("+id+") is not a "+type)}expect(!loadTimeData,"should only include this file once");loadTimeData=new LoadTimeData;window.loadTimeData=loadTimeData;console.warn("crbug/1173575, non-JS module files deprecated.");</script><script>loadTimeData.data = {"fileName":"DST_%D0%91%D0%BB%D0%BE%D0%BA_4_%D0%9C%D0%BE%D0%B4%D1%83%D0%BB%D1%8C_ML-5._%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B8_%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9.pdf","open":"Открыть","pdfUrl":"https://lms-cdn.skillfactory.ru/assets/courseware/v1/7edba8ea4b312c39ddd9701e92f9fa33/asset-v1:SkillFactory+DST-3.0+28FEB2021+type@asset+block/DST_%D0%91%D0%BB%D0%BE%D0%BA_4_%D0%9C%D0%BE%D0%B4%D1%83%D0%BB%D1%8C_ML-5._%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85_%D0%B8_%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B0_%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B5%D0%B9.pdf"};</script></body></html>
